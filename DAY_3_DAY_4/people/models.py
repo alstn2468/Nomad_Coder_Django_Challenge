@@ -21,7 +21,7 @@ class Person(AbstractTimeStamp):
 
     name = models.CharField(max_length=20)
     kind = models.CharField(max_length=8, choices=KIND_CHOICES, default=KIND_ACTOR)
-    photo = models.ImageField(upload_to="person_images", null=True)
+    photo = models.ImageField(upload_to="person_images", blank=True)
 
     def __str__(self):
         return self.name

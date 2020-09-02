@@ -14,7 +14,7 @@ Here are the models you have to create:
 
 
 class Book(AbstractItem):
-    cover_image = models.ImageField(upload_to="book_images", null=True)
+    cover_image = models.ImageField(upload_to="book_images", blank=True)
     category = models.ForeignKey(
         "categories.Category", related_name="book_category", on_delete=models.CASCADE
     )
