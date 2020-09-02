@@ -14,3 +14,6 @@ class Category(AbstractTimeStamp):
 
     name = models.CharField(max_length=20)
     kind = models.CharField(max_length=6, choices=KIND_CHOICES, default=KIND_BOOK)
+
+    def __str__(self):
+        return self.name
