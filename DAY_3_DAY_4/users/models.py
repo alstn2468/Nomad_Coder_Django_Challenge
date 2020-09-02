@@ -1,10 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from categories.models import Category
-
-
-def set_cateogry_fk_model():
-    return Category.objects.all()[:1].get()
 
 
 class User(AbstractUser):
@@ -25,11 +20,13 @@ class User(AbstractUser):
     fav_book_genre = models.ForeignKey(
         "categories.Category",
         related_name="fav_book_genre",
-        on_delete=models.SET(set_cateogry_fk_model),
+        on_delete=models.SET_NULL,
+        null=True,
     )
     fav_movie_genre = models.ForeignKey(
         "categories.Category",
         related_name="fav_movie_genre",
-        on_delete=models.SET(set_cateogry_fk_model),
+        on_delete=models.SET_NULL,
+        null=True,
     )
 
