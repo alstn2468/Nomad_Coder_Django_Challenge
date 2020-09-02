@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-
     PREF_BOOKS = "books"
     PREF_MOVIES = "movies"
     PREF_CHOICES = ((PREF_BOOKS, "Books"), (PREF_MOVIES, "Movies"))

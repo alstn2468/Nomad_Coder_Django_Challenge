@@ -1,6 +1,13 @@
 from django.db import models
 from core.models import AbstractTimeStamp
 
+"""
+Here are the models you have to create:
+- Category
+  name
+  kind (book/movie/both)
+"""
+
 
 class Category(AbstractTimeStamp):
     KIND_BOOK = "book"
