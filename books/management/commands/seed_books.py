@@ -1,11 +1,9 @@
 from core.management.commands.custom_command import CustomCommand
-from django.contrib.admin.utils import flatten
 from django_seed import Seed
 from random import choice, randint, uniform
 from books.models import Book
 from categories.models import Category
 from people.models import Person
-from users.models import User
 
 
 class Command(CustomCommand):
@@ -20,7 +18,6 @@ class Command(CustomCommand):
 
             self.stdout.write(self.style.SUCCESS("■ START CREATE BOOKS"))
 
-            users = User.objects.all()
             persons = Person.objects.all()
             categories = Category.objects.all()
 

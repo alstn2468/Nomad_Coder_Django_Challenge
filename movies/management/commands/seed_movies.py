@@ -5,7 +5,6 @@ from random import choice, randint, uniform
 from movies.models import Movie
 from categories.models import Category
 from people.models import Person
-from users.models import User
 
 
 class Command(CustomCommand):
@@ -20,7 +19,6 @@ class Command(CustomCommand):
 
             self.stdout.write(self.style.SUCCESS("■ START CREATE MOVIES"))
 
-            users = User.objects.all()
             persons = Person.objects.all()
             categories = Category.objects.all()
 
