@@ -27,8 +27,18 @@ class Command(BaseCommand):
                     "is_staff": False,
                     "is_superuser": False,
                     "bio": lambda x: seeder.faker.sentence(),
-                    "preference": lambda x: choice(User.PREF_CHOICES),
-                    "language": lambda x: choice(User.LANG_CHOICES),
+                    "preference": lambda x: choice(
+                        [
+                            User.PREF_BOOKS,
+                            User.PREF_MOVIES,
+                        ]
+                    ),
+                    "language": lambda x: choice(
+                        [
+                            User.LANG_EN,
+                            User.LANG_KR,
+                        ]
+                    ),
                     "fav_book_cat": lambda x: choice(categories),
                     "fav_movie_cat": lambda x: choice(categories),
                 },
