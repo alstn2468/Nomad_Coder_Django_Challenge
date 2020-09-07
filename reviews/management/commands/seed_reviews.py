@@ -1,6 +1,6 @@
 from core.management.commands.custom_command import CustomCommand
 from django_seed import Seed
-from random import choice, uniform
+from random import choice, randint
 from reviews.models import Review
 from movies.models import Movie
 from books.models import Book
@@ -17,19 +17,21 @@ class Command(CustomCommand):
         try:
             total = int(options.get("total"))
 
-            self.stdout.write(self.style.SUCCESS("■ START CREATE MOVIE REVIEWS"))
+            self.stdout.write(self.style.SUCCESS("■ START CREATE REVIEWS"))
 
             users = User.objects.all()
             movies = Movie.objects.all()
+            books = Book.objects.all()
 
-            for idx, movie in enumerate(movies):
+            for idx, (movie, book) in enumerate(zip(movies, books)):
                 seeder = Seed.seeder()
                 seeder.add_entity(
                     Review,
                     total,
                     {
-                        "rating": lambda x: uniform(0.0, 5.0),
+                        "rating": lambda x: randint(0, 6),
                         "movie": movie,
+                        "book": book,
                         "text": seeder.faker.sentence(),
                         "created_by": lambda x: choice(users),
                     },
@@ -45,36 +47,7 @@ class Command(CustomCommand):
 
                 seeder.execute()
 
-            self.stdout.write(self.style.SUCCESS("■ SUCCESS CREATE MOVIE REVIEWS!"))
-
-            self.stdout.write(self.style.SUCCESS("■ START CREATE BOOK REVIEWS"))
-
-            books = Book.objects.all()
-
-            for idx, book in enumerate(books):
-                seeder = Seed.seeder()
-                seeder.add_entity(
-                    Review,
-                    total,
-                    {
-                        "rating": lambda x: uniform(0.0, 5.0),
-                        "book": book,
-                        "text": seeder.faker.sentence(),
-                        "created_by": lambda x: choice(users),
-                    },
-                )
-
-                self.progress_bar(
-                    idx + 1,
-                    len(books),
-                    prefix="■ PROGRESS",
-                    suffix="Complete",
-                    length=40,
-                )
-
-                seeder.execute()
-
-            self.stdout.write(self.style.SUCCESS("■ SUCCESS CREATE BOOK REVIEWS!"))
+            self.stdout.write(self.style.SUCCESS("■ SUCCESS CREATE REVIEWS!"))
 
         except Exception as e:
             self.stdout.write(self.style.ERROR(f"■ {e}"))
