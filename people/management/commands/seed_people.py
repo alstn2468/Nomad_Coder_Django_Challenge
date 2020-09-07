@@ -1,26 +1,40 @@
 from django.core.management.base import BaseCommand
+from django_seed import Seed
+from random import choice
+from people.models import Person
 
 
-class CustomCommand(BaseCommand):
-    def progress_bar(
-        self,
-        iteration,
-        total,
-        prefix="",
-        suffix="",
-        decimals=1,
-        length=100,
-        fill="█",
-        printEnd="\r",
-    ):
-        percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
-        filledLength = int(length * iteration // total)
-        bar = fill * filledLength + "-" * (length - filledLength)
+class Command(BaseCommand):
+    help = "Automatically create people"
 
-        self.stdout.write(
-            self.style.SUCCESS("\r%s |%s| %s%% %s" % (prefix, bar, percent, suffix)),
-            ending=printEnd,
-        )
+    def add_arguments(self, parser):
+        parser.add_argument("--total", default=1, help="Number of people to create")
 
-        if iteration == total:
-            self.stdout.write("\n")
+    def handle(self, *args, **options):
+        try:
+            total = int(options.get("total"))
+
+            self.stdout.write(self.style.SUCCESS("■ START CREATE PEOPLE"))
+
+            seeder = Seed.seeder()
+            seeder.add_entity(
+                Person,
+                total,
+                {
+                    "name": lambda x: seeder.faker.name(),
+                    "kind": lambda x: choice(
+                        [
+                            Person.KIND_ACTOR,
+                            Person.KIND_DIRECTOR,
+                            Person.KIND_WRITER,
+                        ]
+                    ),
+                },
+            )
+            seeder.execute()
+
+            self.stdout.write(self.style.SUCCESS("■ SUCCESS CREATE ALL PEOPLE!"))
+
+        except Exception as e:
+            self.stdout.write(self.style.ERROR(f"■ {e}"))
+            self.stdout.write(self.style.ERROR("■ FAIL CREATE PEOPLE"))

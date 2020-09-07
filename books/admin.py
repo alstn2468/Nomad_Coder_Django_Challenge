@@ -9,4 +9,8 @@ class BookAdmin(admin.ModelAdmin):
         "year",
         "rating",
     )
-    list_filter = ("year", "rating", "category",)
+    list_filter = (
+        "year",
+        "rating",
+        "category",
+    )
