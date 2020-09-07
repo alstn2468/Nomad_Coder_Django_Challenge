@@ -16,16 +16,19 @@ class User(AbstractUser):
         max_length=20, choices=PREF_CHOICES, default=PREF_MOVIES
     )
     language = models.CharField(max_length=20, choices=LANG_CHOICES, default=LANG_EN)
-    fav_book_genre = models.ForeignKey(
+    fav_book_cat = models.ForeignKey(
         "categories.Category",
-        related_name="fav_book_genre",
         on_delete=models.SET_NULL,
         null=True,
+        related_name="book_users",
     )
-    fav_movie_genre = models.ForeignKey(
+    fav_movie_cat = models.ForeignKey(
         "categories.Category",
-        related_name="fav_movie_genre",
         on_delete=models.SET_NULL,
         null=True,
+        related_name="movie_users",
     )
+
+    def __str__(self):
+        return self.username
 

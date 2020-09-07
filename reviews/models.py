@@ -1,35 +1,20 @@
 from django.db import models
 from core.models import AbstractTimeStamp
 
-"""
-Here are the models you have to create:
-- Review
-  created_by (ForeignKey => users.User)
-  text
-  movie (ForeignKey => movies.Movie, null,blank)
-  book (ForeignKey => movies.Movie, null,blank)
-  rating
-"""
-
 
 class Review(AbstractTimeStamp):
     created_by = models.ForeignKey(
-        "users.User", related_name="user", on_delete=models.CASCADE
+        "users.User", on_delete=models.CASCADE, related_name="reviews"
     )
     text = models.TextField()
-    rating = models.FloatField(default=0)
     movie = models.ForeignKey(
-        "movies.Movie",
-        related_name="movie",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
+        "movies.Movie", on_delete=models.CASCADE, related_name="reviews"
     )
     book = models.ForeignKey(
-        "books.Book",
-        related_name="book",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
+        "books.Book", on_delete=models.CASCADE, related_name="reviews"
     )
+    rating = models.IntegerField()
+
+    def __str__(self):
+        return self.text
 

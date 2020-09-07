@@ -5,19 +5,20 @@ from users.models import User
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
-
-    fieldsets = UserAdmin.fieldsets + ((
-        "Custom Profile",
-        {
-            "fields": (
-                "bio",
-                "preference",
-                "language",
-                "fav_book_genre",
-                "fav_movie_genre",
-            )
-        },
-    ), )
+    fieldsets = UserAdmin.fieldsets + (
+        (
+            "Custom Profile",
+            {
+                "fields": (
+                    "bio",
+                    "preference",
+                    "language",
+                    "fav_book_cat",
+                    "fav_movie_cat",
+                )
+            },
+        ),
+    )
 
     list_display = (
         "username",
@@ -26,13 +27,13 @@ class UserAdmin(UserAdmin):
         "email",
         "preference",
         "language",
-        "fav_book_genre",
-        "fav_movie_genre",
+        "fav_book_cat",
+        "fav_movie_cat",
     )
 
     list_filter = (
         "preference",
         "language",
-        "fav_book_genre",
-        "fav_movie_genre",
+        "fav_book_cat",
+        "fav_movie_cat",
     )

@@ -6,15 +6,11 @@ from reviews.models import Review
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
         "created_by",
-        "text",
+        "movie",
+        "book",
         "rating",
-        "movie",
-        "book",
     )
-
     list_filter = (
-        "created_by__username",
         "movie",
         "book",
     )
-

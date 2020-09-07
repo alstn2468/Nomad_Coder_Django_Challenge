@@ -11,9 +11,9 @@ class AbstractTimeStamp(models.Model):
 
 
 class AbstractItem(AbstractTimeStamp):
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=120)
     year = models.PositiveIntegerField(default=datetime.now().year)
-    rating = models.FloatField(default=0)
+    rating = models.FloatField()
 
     class Meta:
         abstract = True

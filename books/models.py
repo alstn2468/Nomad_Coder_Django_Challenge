@@ -1,26 +1,15 @@
 from django.db import models
 from core.models import AbstractItem
 
-"""
-Here are the models you have to create:
-- Book:
-  title
-  year
-  category (ForeignKey => categories.Category)
-  cover_image
-  rating
-  writer (ForeignKey => people.Person)
-"""
-
 
 class Book(AbstractItem):
-    cover_image = models.ImageField(upload_to="book_images")
+    cover_image = models.ImageField()
     category = models.ForeignKey(
-        "categories.Category", related_name="book_category", on_delete=models.CASCADE
+        "categories.Category", on_delete=models.CASCADE, related_name="books"
     )
     writer = models.ForeignKey(
-        "people.Person", related_name="book_writer", on_delete=models.CASCADE
+        "people.Person", on_delete=models.CASCADE, related_name="books"
     )
 
-    class Meta:
-        verbose_name = "Book"
+    def __str__(self):
+        return self.title

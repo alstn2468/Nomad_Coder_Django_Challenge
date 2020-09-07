@@ -7,11 +7,5 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "kind",
-        "created_at",
-        "updated_at",
     )
-
-    list_filter = (
-        "name",
-        "kind",
-    )
+    list_filter = ("kind",)
