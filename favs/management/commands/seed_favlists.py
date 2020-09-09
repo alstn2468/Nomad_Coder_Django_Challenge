@@ -1,50 +1,28 @@
-from django.contrib.admin.utils import flatten
-from django.db import IntegrityError
-from copy import deepcopy
-from django_seed import Seed
-from random import randint, choice
+from django.core.management.base import BaseCommand
+from favs.models import FavList
+from users.models import User
 from movies.models import Movie
 from books.models import Book
-from users.models import User
-from favs.models import FavList
-from core.management.commands.custom_command import CustomCommand
 
 
-class Command(CustomCommand):
-    help = "Automatically create fav lists"
+class Command(BaseCommand):
+
+    help = "This command seeds lists"
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "--total", help="How many lists do you want to create?", default=10
+        )
 
     def handle(self, *args, **options):
-        try:
-            self.stdout.write(self.style.SUCCESS("■ START CREATE FAV LISTS"))
-
-            users = User.objects.all()
-            books = Book.objects.all()
-            movies = Movie.objects.all()
-
-            for idx, user in enumerate(users):
-                self.progress_bar(
-                    idx + 1,
-                    len(users),
-                    prefix="■ PROGRESS",
-                    suffix="Complete",
-                    length=40,
-                )
-
-                try:
-                    fav_list = FavList.objects.create(created_by=user)
-
-                    selected_books = books[randint(0, 5) : randint(6, len(books))]
-                    selected_movies = movies[randint(0, 5) : randint(6, len(movies))]
-
-                    fav_list.books.add(*selected_books)
-                    fav_list.movies.add(*selected_movies)
-
-                    fav_list.save()
-                except IntegrityError:
-                    continue
-
-            self.stdout.write(self.style.SUCCESS("■ SUCCESS CREATE ALL FAV LISTS!"))
-
-        except Exception as e:
-            self.stdout.write(self.style.ERROR(f"■ {e}"))
-            self.stdout.write(self.style.ERROR("■ FAIL CREATE FAV LISTS"))
+        total = int(options.get("total"))
+        users = User.objects.all()[:total]
+        movies = Movie.objects.all()
+        books = Book.objects.all()
+        for user in users:
+            fav_list = FavList.objects.create(
+                created_by=user,
+            )
+            fav_list.movies.set(choices(movies))
+            fav_list.books.set(choices(books))
+        self.stdout.write(self.style.SUCCESS(f"{total} lists created!"))

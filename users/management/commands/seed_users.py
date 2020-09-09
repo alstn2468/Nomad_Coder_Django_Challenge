@@ -1,52 +1,34 @@
+from random import choice
 from django.core.management.base import BaseCommand
 from django_seed import Seed
-from random import choice
 from users.models import User
 from categories.models import Category
 
 
 class Command(BaseCommand):
-    help = "Automatically create users"
+
+    help = "This command seeds users"
 
     def add_arguments(self, parser):
-        parser.add_argument("--total", default=1, help="Number of users to create")
+        parser.add_argument(
+            "--total", help="How many users do you want to create?", default=10
+        )
 
     def handle(self, *args, **options):
-        try:
-            total = int(options.get("total"))
-
-            self.stdout.write(self.style.SUCCESS("■ START CREATE USERS"))
-
-            categories = Category.objects.all()
-
-            seeder = Seed.seeder()
-            seeder.add_entity(
-                User,
-                total,
-                {
-                    "is_staff": False,
-                    "is_superuser": False,
-                    "bio": lambda x: seeder.faker.sentence(),
-                    "preference": lambda x: choice(
-                        [
-                            User.PREF_BOOKS,
-                            User.PREF_MOVIES,
-                        ]
-                    ),
-                    "language": lambda x: choice(
-                        [
-                            User.LANG_EN,
-                            User.LANG_KR,
-                        ]
-                    ),
-                    "fav_book_cat": lambda x: choice(categories),
-                    "fav_movie_cat": lambda x: choice(categories),
-                },
-            )
-            seeder.execute()
-
-            self.stdout.write(self.style.SUCCESS("■ SUCCESS CREATE ALL USERS!"))
-
-        except Exception as e:
-            self.stdout.write(self.style.ERROR(f"■ {e}"))
-            self.stdout.write(self.style.ERROR("■ FAIL CREATE USERS"))
+        total = int(options.get("total"))
+        seeder = Seed.seeder()
+        movies = Category.objects.filter(kind=Category.KIND_MOVIE)
+        books = Category.objects.filter(kind=Category.KIND_BOOK)
+        seeder.add_entity(
+            User,
+            total,
+            {
+                "is_staff": False,
+                "is_superuser": False,
+                "preference": lambda x: choice([User.PREF_BOOKS, User.PREF_MOVIES]),
+                "fav_book_cat": lambda x: choice(books),
+                "fav_movie_cat": lambda x: choice(movies),
+            },
+        )
+        seeder.execute()
+        self.stdout.write(self.style.SUCCESS(f"{total} users created!"))
