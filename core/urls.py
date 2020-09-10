@@ -1,10 +1,9 @@
 from django.urls import path
-from core.views import search, genre, home
+from core.views import resolve_home, resolve_search
 
 app_name = "core"
 
 urlpatterns = [
-    path("", home, name="home"),
-    path("genre/", genre, name="genre"),
-    path("search/", search, name="search"),
+    path("", resolve_home, name="home"),
+    path("search", resolve_search, name="search"),
 ]

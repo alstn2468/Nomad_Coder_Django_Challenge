@@ -1,8 +1,6 @@
 from django.urls import path
-from books.views import book_list
+from books.views import resolve_books
 
 app_name = "books"
 
-urlpatterns = [
-    path("", book_list, name="book_list"),
-]
+urlpatterns = [path("", resolve_books, name="books")]

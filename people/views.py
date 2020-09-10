@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
 
-def people_list(request):
-    return render(request, "peoples/people_list.html")
+def resolve_people(request):
+    return render(request, "people/people.html")
