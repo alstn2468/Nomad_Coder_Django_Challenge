@@ -6,4 +6,28 @@
 
 <h1>MOVIE LIST</h1>
 
+{% for movie in movies %}
+<p>{{ movie.title }}</p>
+{% endfor %}
+
+<a
+    {% if movies.has_previous %}
+    href="?page={{ movies.previous_page_number }}"
+    {% else %}
+    style="visibility: hidden"
+    {% endif %}
+>
+    <
+</a>
+<span>{{ movies.number }} of {{ movies.paginator.num_pages }}</span>
+<a
+    {% if movies.has_next %}
+    href="?page={{ movies.next_page_number }}"
+    {% else %}
+    style="visibility: hidden"
+    {% endif %}
+>
+    >
+</a>
+
 {% endblock content %}
