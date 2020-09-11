@@ -1,6 +1,6 @@
 from django.urls import path
-from books.views import resolve_books
+from books.views import BookListView
 
 app_name = "books"
 
-urlpatterns = [path("", resolve_books, name="books")]
+urlpatterns = [path("", BookListView.as_view(), name="books")]

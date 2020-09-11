@@ -1,19 +1,19 @@
-from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.views.generic import ListView
+from django.http import Http404
+from django.shortcuts import redirect, reverse
 from books.models import Book
 
 
-def resolve_books(request):
-    books = Book.objects.all().order_by("-created_at")
-    paginator = Paginator(books, 3)
+class BookListView(ListView):
+    model = Book
+    paginate_by = 10
+    paginate_orphans = 5
+    ordering = "created_at"
+    context_object_name = "books"
 
-    page_number = request.GET.get("page", 1)
-    page_obj = paginator.get_page(page_number)
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super(BookListView, self).dispatch(request, *args, **kwargs)
 
-    return render(
-        request,
-        "books/book_list.html",
-        {
-            "books": page_obj,
-        },
-    )
+        except Http404:
+            return redirect(reverse("core:home"))
