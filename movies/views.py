@@ -11,6 +11,11 @@ class MovieListView(ListView):
     ordering = "created_at"
     context_object_name = "movies"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "All Movies"
+        return context
+
     def dispatch(self, request, *args, **kwargs):
         try:
             return super(MovieListView, self).dispatch(request, *args, **kwargs)

@@ -3,52 +3,39 @@
 {% block page_title %}HOME{% endblock page_title %} 
 
 {% block content %}
-
-<h1>HOME</h1>
-
-{% if movies %}
 <div>
-    <h2>Movies</h2>
-    {% for movie in movies.object_list %}
-    <div>
-        <h3>{{movie.title}}</h3>
-        <h5>{{movie.year}}</h5>
-    </div>
-    {% endfor %}
-    <hr />
-</div>
-{% endif %} {% if books %}
-<div>
-    <h2>Books</h2>
-    {% for book in books.object_list %}
-    <div>
-        <h3>{{book.title}}</h3>
-        <h5>{{book.year}}</h5>
-    </div>
-    {% endfor %}
-</div>
+  <h2>Movies</h2>
+  {% for movie in movies %}
+  <div>
+    <h3>{{movie.title}}</h3>
+    <h5>{{movie.year}}</h5>
+  </div>
+  {% endfor %}
+  <a href="{% url 'movies:movies' %}">See all movies &rarr;</a>
 <hr />
-{% endif %} {% if people %}
-<div>
-    <h2>People</h2>
-    {% for person in people.object_list %}
-    <div>
-        <h3>{{person.name}}</h3>
-        <h5>{{person.kind}}</h5>
-    </div>
-    {% endfor %}
 </div>
+
+<div>
+  <h2>Books</h2>
+  {% for book in books %}
+  <div>
+    <h3>{{book.title}}</h3>
+    <h5>{{book.year}}</h5>
+  </div>
+  {% endfor %}
+  <a href="{% url 'books:books' %}">See all books &rarr;</a>
+<hr />
+</div>
+
+<div>
+  <h2>People</h2>
+  {% for person in people %}
+  <div>
+    <h3>{{person.name}}</h3>
+    <h5>{{person.kind}}</h5>
+  </div>
+  {% endfor %}
+  <a href="{% url 'people:people' %}">See all people &rarr;</a>
 <hr />
 <div>
-    {% endif %}
-
-    <div>
-        {% if current_page != '1' %}
-        <a href="?page={{current_page|add:-1}}">Previous</a>
-        {% endif %} Page {{current_page}} {% if movies or books or people %}
-        <a href="?page={{current_page|add:1}}">Next</a>
-        {% endif %}
-    </div>
-
-    {% endblock content %}
-</div>
+{% endblock content %}
