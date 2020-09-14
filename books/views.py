@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.http import Http404
 from django.shortcuts import redirect, reverse
 from books.models import Book
@@ -13,7 +13,7 @@ class BookListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_title'] = "All Books"
+        context["page_title"] = "All Books"
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -22,3 +22,7 @@ class BookListView(ListView):
 
         except Http404:
             return redirect(reverse("core:home"))
+
+
+class BookDetailView(DetailView):
+    model = Book
