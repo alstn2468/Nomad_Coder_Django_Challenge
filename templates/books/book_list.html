@@ -9,7 +9,6 @@
     <h3>{{ book.title }}</h3>
     <h5>{{ book.year }}</h5>
     <a href="{% url 'books:book_detail' book.pk %}">Detail</a>
-    <a href="{% url 'books:book_update' book.pk %}">Update</a>
   </div>
   {% endfor %}
 <hr />
