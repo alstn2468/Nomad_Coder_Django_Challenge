@@ -40,9 +40,9 @@ class BookCreateView(CreateView):
     fields = [
         "title",
         "year",
-        "cover_image",
         "category",
         "writer",
+        "rating",
     ]
 
     def get_context_data(self, **kwargs):
@@ -57,9 +57,9 @@ class BookUpdateView(UpdateView):
     fields = [
         "title",
         "year",
-        "cover_image",
         "category",
         "writer",
+        "rating",
     ]
 
     def get_context_data(self, **kwargs):

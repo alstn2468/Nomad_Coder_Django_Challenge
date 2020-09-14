@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.db import models
 from core.models import AbstractItem
 
@@ -13,3 +14,6 @@ class Book(AbstractItem):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("books:book_detail", kwargs={"pk": self.pk})
