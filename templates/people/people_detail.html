@@ -1,0 +1,12 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<h2>PERSON DETAIL</h2>
+
+<p>person : {{ person.name }}</p>
+<p>KIND : {{ person.kind }}</p>
+
+<a href="{% url 'people:people' %}">BACK TO LIST</a>
+
+{% endblock content %}

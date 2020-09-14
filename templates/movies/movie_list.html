@@ -5,8 +5,8 @@
   <h2>Movies</h2>
   {% for movie in movies %}
   <div>
-    <h3>{{movie.title}}</h3>
-    <h5>{{movie.year}}</h5>
+    <h3>{{ movie.title }}</h3>
+    <h5>{{ movie.year }}</h5>
     <a href="{% url 'movies:movie_detail' movie.pk %}">Detail</a>
   </div>
   {% endfor %}
@@ -14,13 +14,13 @@
 </div>
 <div>
   {% if page_obj.has_previous %}
-        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
     {% endif %}
 
-    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
 
     {% if page_obj.has_next  %}
-        <a href="?page={{page_obj.next_page_number}}">Next</a>
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
     {% endif %}
 </div>
 {% endblock content %}

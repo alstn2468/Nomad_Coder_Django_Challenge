@@ -5,21 +5,22 @@
   <h2>People</h2>
   {% for person in people %}
   <div>
-    <h3>{{person.name}}</h3>
-    <h5>{{person.kind}}</h5>
+    <h3>{{ person.name }}</h3>
+    <h5>{{ person.kind }}</h5>
+    <a href="{% url 'people:people_detail' person.pk %}">Detail</a>
   </div>
   {% endfor %}
 <hr />
 </div>
 <div>
   {% if page_obj.has_previous %}
-        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
     {% endif %}
 
-    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
 
     {% if page_obj.has_next  %}
-        <a href="?page={{page_obj.next_page_number}}">Next</a>
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
     {% endif %}
 </div>
 {% endblock content %}

@@ -7,8 +7,8 @@
   <h2>Movies</h2>
   {% for movie in movies %}
   <div>
-    <h3>{{movie.title}}</h3>
-    <h5>{{movie.year}}</h5>
+    <h3>{{ movie.title }}</h3>
+    <h5>{{ movie.year }}</h5>
   </div>
   {% endfor %}
   <a href="{% url 'movies:movies' %}">See all movies &rarr;</a>
@@ -19,8 +19,8 @@
   <h2>Books</h2>
   {% for book in books %}
   <div>
-    <h3>{{book.title}}</h3>
-    <h5>{{book.year}}</h5>
+    <h3>{{ book.title }}</h3>
+    <h5>{{ book.year }}</h5>
   </div>
   {% endfor %}
   <a href="{% url 'books:books' %}">See all books &rarr;</a>
@@ -31,8 +31,8 @@
   <h2>People</h2>
   {% for person in people %}
   <div>
-    <h3>{{person.name}}</h3>
-    <h5>{{person.kind}}</h5>
+    <h3>{{ person.name }}</h3>
+    <h5>{{ person.kind }}</h5>
   </div>
   {% endfor %}
   <a href="{% url 'people:people' %}">See all people &rarr;</a>

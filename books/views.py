@@ -26,3 +26,10 @@ class BookListView(ListView):
 
 class BookDetailView(DetailView):
     model = Book
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        book = kwargs["object"]
+        context["page_title"] = book.title
+
+        return context
