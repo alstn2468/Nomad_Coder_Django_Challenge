@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.db import models
 from core.models import AbstractTimeStamp
 
@@ -19,3 +20,6 @@ class Person(AbstractTimeStamp):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("people:people_detail", kwargs={"pk": self.pk})

@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.http import Http404
 from django.shortcuts import redirect, reverse
 from people.models import Person
@@ -33,5 +33,37 @@ class PersonDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         people = kwargs["object"]
         context["page_title"] = people.name
+
+        return context
+
+
+class PersonCreateView(CreateView):
+    model = Person
+    fields = [
+        "name",
+        "photo",
+        "kind",
+    ]
+    template_name = "people/people_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "PERSON CREATE"
+
+        return context
+
+
+class PersonUpdateView(UpdateView):
+    model = Person
+    fields = [
+        "name",
+        "photo",
+        "kind",
+    ]
+    template_name = "people/people_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "PERSON UPDATE"
 
         return context

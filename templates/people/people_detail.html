@@ -7,6 +7,7 @@
 <p>person : {{ person.name }}</p>
 <p>KIND : {{ person.kind }}</p>
 
+<a href="{% url 'people:people_update' person.pk %}">Update</a>
 <a href="{% url 'people:people' %}">BACK TO LIST</a>
 
 {% endblock content %}

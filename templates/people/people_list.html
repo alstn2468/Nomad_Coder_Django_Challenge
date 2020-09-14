@@ -2,6 +2,7 @@
 
 {% block content %}
 <div>
+  <a href="{% url 'people:people_create' %}">CREATE</a>
   <h2>People</h2>
   {% for person in people %}
   <div>
