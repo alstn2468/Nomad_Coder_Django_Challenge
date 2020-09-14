@@ -3,7 +3,7 @@ from core.models import AbstractItem
 
 
 class Movie(AbstractItem):
-    cover_image = models.ImageField()
+    cover_image = models.ImageField(null=True, blank=True)
     category = models.ForeignKey(
         "categories.Category", on_delete=models.CASCADE, related_name="movies"
     )
@@ -14,4 +14,3 @@ class Movie(AbstractItem):
 
     def __str__(self):
         return self.title
-

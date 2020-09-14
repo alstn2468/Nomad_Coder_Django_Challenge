@@ -40,6 +40,7 @@ class BookCreateView(CreateView):
     fields = [
         "title",
         "year",
+        "cover_image",
         "category",
         "writer",
         "rating",
@@ -57,6 +58,7 @@ class BookUpdateView(UpdateView):
     fields = [
         "title",
         "year",
+        "cover_image",
         "category",
         "writer",
         "rating",

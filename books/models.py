@@ -4,7 +4,7 @@ from core.models import AbstractItem
 
 
 class Book(AbstractItem):
-    cover_image = models.ImageField()
+    cover_image = models.ImageField(null=True, blank=True)
     category = models.ForeignKey(
         "categories.Category", on_delete=models.CASCADE, related_name="books"
     )
