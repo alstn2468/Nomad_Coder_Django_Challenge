@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>MOVIE DETAIL</h2>
+
+<p>TITLE : {{ movie.title }}</p>
+<p>YEAR : {{ movie.year }}</p>
+<p>CATEGORY : {{ movie.category }}</p>
+<p>DIRECTOR : {{ movie.director }}</p>
+<p>CAST : 
+{% for person in movie.cast.all %} 
+{{ person }} 
+{% endfor %}
+</p>
+<p>RATING : {{ movie.rating }}</p>
+
+<a href="{% url 'movies:movies' %}">BACK TO LIST</a>
+
+{% endblock content %}

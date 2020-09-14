@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.http import Http404
 from django.shortcuts import redirect, reverse
 from movies.models import Movie
@@ -22,3 +22,7 @@ class MovieListView(ListView):
 
         except Http404:
             return redirect(reverse("core:home"))
+
+
+class MovieDetailView(DetailView):
+    model = Movie
