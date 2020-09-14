@@ -1,4 +1,9 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+)
 from django.http import Http404
 from django.shortcuts import redirect, reverse
 from people.models import Person

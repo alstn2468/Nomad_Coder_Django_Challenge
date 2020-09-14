@@ -18,6 +18,9 @@ class Person(AbstractTimeStamp):
     photo = models.ImageField(null=True, blank=True)
     kind = models.CharField(max_length=15, choices=KIND_CHOICES)
 
+    class Meta:
+        verbose_name_plural = "People"
+
     def __str__(self):
         return self.name
 
