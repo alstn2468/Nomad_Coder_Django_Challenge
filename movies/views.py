@@ -54,7 +54,7 @@ class MovieCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "MOVIE CREATE"
+        context["page_title"] = "Create Movie"
 
         return context
 
@@ -73,6 +73,6 @@ class MovieUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "MOVIE UPDATE"
+        context["page_title"] = "Update Movie"
 
         return context

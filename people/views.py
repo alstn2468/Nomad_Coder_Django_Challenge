@@ -53,7 +53,7 @@ class PersonCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "PERSON CREATE"
+        context["page_title"] = "Create Person"
 
         return context
 
@@ -69,6 +69,6 @@ class PersonUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "PERSON UPDATE"
+        context["page_title"] = "Update Person"
 
         return context

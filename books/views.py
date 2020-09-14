@@ -53,7 +53,7 @@ class BookCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "BOOK CREATE"
+        context["page_title"] = "Create Book"
 
         return context
 
@@ -71,6 +71,6 @@ class BookUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = "BOOK UPDATE"
+        context["page_title"] = "Update Book"
 
         return context
