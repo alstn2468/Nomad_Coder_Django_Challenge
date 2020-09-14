@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.http import Http404
 from django.shortcuts import redirect, reverse
 from books.models import Book
@@ -31,5 +31,39 @@ class BookDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         book = kwargs["object"]
         context["page_title"] = book.title
+
+        return context
+
+
+class BookCreateView(CreateView):
+    model = Book
+    fields = [
+        "title",
+        "year",
+        "cover_image",
+        "category",
+        "writer",
+    ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "BOOK CREATE"
+
+        return context
+
+
+class BookUpdateView(UpdateView):
+    model = Book
+    fields = [
+        "title",
+        "year",
+        "cover_image",
+        "category",
+        "writer",
+    ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "BOOK UPDATE"
 
         return context
