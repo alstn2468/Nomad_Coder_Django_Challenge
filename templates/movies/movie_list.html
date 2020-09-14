@@ -2,6 +2,7 @@
 
 {% block content %}
 <div>
+  <a href="{% url 'movies:movie_create' %}">CREATE</a>
   <h2>Movies</h2>
   {% for movie in movies %}
   <div>

@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.http import Http404
 from django.shortcuts import redirect, reverse
 from movies.models import Movie
@@ -31,5 +31,43 @@ class MovieDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         movie = kwargs["object"]
         context["page_title"] = movie.title
+
+        return context
+
+
+class MovieCreateView(CreateView):
+    model = Movie
+    fields = [
+        "title",
+        "year",
+        "cover_image",
+        "category",
+        "director",
+        "cast",
+        "rating",
+    ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "MOVIE CREATE"
+
+        return context
+
+
+class MovieUpdateView(UpdateView):
+    model = Movie
+    fields = [
+        "title",
+        "year",
+        "cover_image",
+        "category",
+        "director",
+        "cast",
+        "rating",
+    ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "MOVIE UPDATE"
 
         return context

@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.db import models
 from core.models import AbstractItem
 
@@ -14,3 +15,6 @@ class Movie(AbstractItem):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("movies:movie_detail", kwargs={"pk": self.pk})

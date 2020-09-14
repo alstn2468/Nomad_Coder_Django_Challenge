@@ -15,6 +15,7 @@
 </p>
 <p>RATING : {{ movie.rating }}</p>
 
+<a href="{% url 'movies:movie_update' movie.pk %}">Update</a>
 <a href="{% url 'movies:movies' %}">BACK TO LIST</a>
 
 {% endblock content %}
