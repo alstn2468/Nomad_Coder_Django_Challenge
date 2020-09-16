@@ -2,13 +2,11 @@
 
 {% block content %}
 <div>
-  <a href="{% url 'people:people_create' %}">CREATE</a>
   <h2>People</h2>
   {% for person in people %}
   <div>
-    <h3>{{ person.name }}</h3>
+    <h3><a href="{% url 'people:people_detail' person.pk %}">{{ person.name }}</a></h3>
     <h5>{{ person.kind }}</h5>
-    <a href="{% url 'people:people_detail' person.pk %}">Detail</a>
   </div>
   {% endfor %}
 <hr />

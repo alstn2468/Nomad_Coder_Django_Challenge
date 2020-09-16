@@ -2,13 +2,11 @@
 
 {% block content %}
 <div>
-  <a href="{% url 'books:book_create' %}">CREATE</a>
   <h2>Books</h2>
   {% for book in books %}
   <div>
-    <h3>{{ book.title }}</h3>
+    <h3><a href="{% url 'books:book_detail' book.pk %}">{{ book.title }}</a></h3>
     <h5>{{ book.year }}</h5>
-    <a href="{% url 'books:book_detail' book.pk %}">Detail</a>
   </div>
   {% endfor %}
 <hr />
@@ -20,7 +18,7 @@
 
     Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
 
-    {% if page_obj.has_next %}
+    {% if page_obj.has_next  %}
         <a href="?page={{ page_obj.next_page_number }}">Next</a>
     {% endif %}
 </div>

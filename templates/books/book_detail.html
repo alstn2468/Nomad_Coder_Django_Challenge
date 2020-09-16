@@ -2,13 +2,7 @@
 
 {% block content %}
 
-<h2>BOOK DETAIL</h2>
-
-<p>TITLE : {{ book.title }}</p>
-<p>YEAR : {{ book.year }}</p>
-<p>CATEGORY : {{ book.category }}</p>
-<p>WRITER : {{ book.writer }}</p>
-<p>RATING : {{ book.rating }}</p>
+<h2>{{ book.title }}</h2>
 
 <a href="{% url 'books:book_update' book.pk %}">Update</a>
 <a href="{% url 'books:books' %}">BACK TO LIST</a>

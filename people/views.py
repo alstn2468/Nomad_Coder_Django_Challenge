@@ -32,7 +32,8 @@ class PersonListView(ListView):
 
 class PersonDetailView(DetailView):
     model = Person
-    template_name = "people/people_detail.html"
+    template_name = "people/person_detail.html"
+    context_object_name = "person"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -49,7 +50,6 @@ class PersonCreateView(CreateView):
         "photo",
         "kind",
     ]
-    template_name = "people/people_form.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -65,7 +65,6 @@ class PersonUpdateView(UpdateView):
         "photo",
         "kind",
     ]
-    template_name = "people/people_form.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
