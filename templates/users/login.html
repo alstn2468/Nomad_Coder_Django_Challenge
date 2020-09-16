@@ -1,0 +1,9 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+LOGIN
+
+{% include "mixins/auth/auth_form.html" with form=form cta="Login" %}
+
+{% endblock content %}

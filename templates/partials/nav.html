@@ -17,4 +17,16 @@
     <li>
         <a href="{% url "people:people" %}">PEOPLE LIST</a>
     </li>
+    {% if user.is_authenticated %}
+    <li>
+        <a href="{% url "users:logout" %}">LOGOUT</a>
+    </li>
+    {% else %}
+    <li>
+        <a href="{% url "users:login" %}">LOGIN</a>
+    </li>
+    <li>
+        <a href="{% url "users:signup" %}">SIGNUP</a>
+    </li>
+    {% endif %}
 </ul>
