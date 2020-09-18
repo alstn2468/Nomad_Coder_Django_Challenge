@@ -30,8 +30,6 @@ class LoginView(FormView):
 
 
 class LogoutView(LoginRequiredMixin, RedirectView):
-    permanent = False
-    query_string = True
     pattern_name = "core:home"
 
     def get_redirect_url(self, *args, **kwargs):
