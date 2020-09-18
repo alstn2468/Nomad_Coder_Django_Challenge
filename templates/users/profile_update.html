@@ -1,0 +1,9 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+UPDATE PROFILE
+
+{% include "mixins/auth/auth_form.html" with form=form cta="SAVE" %}
+
+{% endblock content %}

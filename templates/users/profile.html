@@ -2,7 +2,8 @@
 
 {% block content %}
 
-<a href="">UPDATE PROFILE</a> / <a href="{% url 'users:password' %}"> CHANGE PASSWORD</a>
+<a href="{% url 'users:update' user.pk %}">UPDATE PROFILE</a> / 
+<a href="{% url 'users:password' %}"> CHANGE PASSWORD</a>
 
 <p>username: {{ user.username }}</p>
 <p>email: {{ user.email }}</p>
@@ -10,18 +11,8 @@
 <p>preference: {{ user.preference }}</p>
 <p>language: {{ user.language }}</p>
 
-<p>
-favoirte book category :
-{% for category in user.fav_boo_cat.all %}
-    {{ category }}
-{% endfor %}
-</p>
+<p>favoirte book category : {{ user.fav_book_cat }}</p>
 
-<p>
-favoirte movie category :
-{% for category in user.fav_movie_cat.all %}
-    {{ category }}
-{% endfor %}
-</p>
+<p>favoirte movie category : {{ user.fav_movie_cat }}</p>
 
 {% endblock content %}

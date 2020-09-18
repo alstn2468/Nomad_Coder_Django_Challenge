@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import password_validation
+from django.contrib.auth.forms import UserChangeForm as BaseUserChangeForm
 from users.models import User
 
 
@@ -111,3 +112,24 @@ class SignUpForm(forms.ModelForm):
         user.username = email
         user.set_password(password)
         user.save()
+
+
+class UserChangeForm(BaseUserChangeForm):
+    password = None
+
+    def __init__(self, *args, **kwargs):
+        super(UserChangeForm, self).__init__(*args, **kwargs)
+        self.fields["username"].disabled = True
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "first_name",
+            "last_name",
+            "bio",
+            "preference",
+            "language",
+            "fav_book_cat",
+            "fav_movie_cat",
+        ]

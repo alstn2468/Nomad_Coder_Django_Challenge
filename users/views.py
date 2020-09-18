@@ -1,12 +1,9 @@
-from django.views.generic import FormView, DetailView, RedirectView
+from django.views.generic import FormView, DetailView, RedirectView, UpdateView
 from django.urls import reverse_lazy
-from django.shortcuts import redirect, reverse
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView as BasePasswordChangeView
-from django.contrib.auth.forms import PasswordChangeForm
-from users.forms import LoginForm, SignUpForm
+from users.forms import LoginForm, SignUpForm, UserChangeForm
 from users.models import User
 
 
@@ -35,10 +32,10 @@ class LoginView(FormView):
 class LogoutView(LoginRequiredMixin, RedirectView):
     permanent = False
     query_string = True
-    pattern_name = "home"
+    pattern_name = "core:home"
 
     def get_redirect_url(self, *args, **kwargs):
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             logout(self.request)
         return super(LogoutView, self).get_redirect_url(*args, **kwargs)
 
@@ -66,7 +63,7 @@ class SignUpView(FormView):
         return super().form_valid(form)
 
 
-class ProfileView(LoginRequiredMixin, DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = User
     template_name = "users/profile.html"
 
@@ -77,8 +74,24 @@ class ProfileView(LoginRequiredMixin, DetailView):
         return context
 
 
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = "users/profile_update.html"
+    form_class = UserChangeForm
+
+    def get_success_url(self):
+        pk = self.kwargs["pk"]
+        return reverse_lazy("users:profile", kwargs={"pk": pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page_title"] = "Profile Update"
+        return context
+
+
 class PasswordChangeView(BasePasswordChangeView):
     template_name = "users/password_change.html"
+    success_url = reverse_lazy("core:home")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
