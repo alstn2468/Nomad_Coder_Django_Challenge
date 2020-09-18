@@ -91,7 +91,13 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
 class PasswordChangeView(BasePasswordChangeView):
     template_name = "users/password_change.html"
-    success_url = reverse_lazy("core:home")
+    success_url = reverse_lazy("users:login")
+
+    def form_valid(self, form):
+        form.save()
+        self.request.session.flush()
+        logout(self.request)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
