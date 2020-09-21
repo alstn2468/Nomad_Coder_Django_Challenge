@@ -1,22 +1,15 @@
 <header>
+    <form action="{% url "core:search" %}">
+        <select name="category">
+            {% for category in categories %}
+                <option value="{{ category }}">{{ category }}</option>
+            {% endfor %}
+        </select>
+        <button>SEARCH</button>
+    </form>
     <ul>
         <li>
             <a href="{% url "core:home" %}">HOME</a>
-        </li>
-        <li>
-            <a href="{% url "categories:categories" %}">GENRE</a>
-        </li>
-        <li>
-            <a href="{% url "core:search" %}">SEARCH</a>
-        </li>
-        <li>
-            <a href="{% url "books:books" %}">BOOK LIST</a>
-        </li>
-        <li>
-            <a href="{% url "movies:movies" %}">MOVIE LIST</a>
-        </li>
-        <li>
-            <a href="{% url "people:people" %}">PEOPLE LIST</a>
         </li>
         {% if user.is_authenticated %}
         <li>

@@ -22,10 +22,12 @@ def resolve_home(request):
 
 
 def resolve_search(request):
+    category = request.GET.get("category", "None")
     return render(
         request,
         "search.html",
         {
             "page_title": "Search",
+            "category": category,
         },
     )
