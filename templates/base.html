@@ -6,7 +6,10 @@
         <title>{{ page_title }}</title>
     </head>
     <body>
-        {% include 'partials/nav.html' %}
+        {% include 'partials/header.html' %}
+        
         {% block content %} {% endblock content %}
+        
+        {% include 'partials/footer.html' %}
     </body>
 </html>
