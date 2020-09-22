@@ -30,8 +30,6 @@ class PersonDetailView(DetailView):
     template_name = "people/person_detail.html"
     context_object_name = "person"
 
-        return context
-
 
 class PersonCreateView(CreateView):
     model = Person
