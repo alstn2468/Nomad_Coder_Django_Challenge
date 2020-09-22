@@ -1,9 +1,8 @@
 {% extends "base.html" %} 
 
+{% block page_title %} PROFILE UPDATE {% endblock page_title %}
+
 {% block content %}
-
-UPDATE PROFILE
-
-{% include "mixins/auth/auth_form.html" with form=form cta="SAVE" %}
-
+    UPDATE PROFILE
+    {% include "mixins/auth/auth_form.html" with form=form cta="SAVE" %}
 {% endblock content %}

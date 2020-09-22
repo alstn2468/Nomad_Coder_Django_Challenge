@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 
+{% block page_title %} MOVIES {% endblock page_title %}
+
 {% block content %}
 <div>
   <h2>Movies</h2>
   {% for movie in movies %}
-  <div>
-    <h3><a href="{% url 'movies:movie_detail' movie.pk %}">{{ movie.title }}</a></h3>
-    <h5>{{ movie.year }}</h5>
-  </div>
+    {% include "mixins/movie.html" with movie=movie %}
   {% endfor %}
 <hr />
 </div>

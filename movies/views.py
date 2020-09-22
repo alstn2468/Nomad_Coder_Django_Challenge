@@ -16,11 +16,6 @@ class MovieListView(ListView):
     ordering = "created_at"
     context_object_name = "movies"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "All Movies"
-        return context
-
     def dispatch(self, request, *args, **kwargs):
         try:
             return super(MovieListView, self).dispatch(request, *args, **kwargs)
@@ -31,13 +26,6 @@ class MovieListView(ListView):
 
 class MovieDetailView(DetailView):
     model = Movie
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        movie = kwargs["object"]
-        context["page_title"] = movie.title
-
-        return context
 
 
 class MovieCreateView(CreateView):
@@ -52,12 +40,6 @@ class MovieCreateView(CreateView):
         "rating",
     ]
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "Create Movie"
-
-        return context
-
 
 class MovieUpdateView(UpdateView):
     model = Movie
@@ -70,9 +52,3 @@ class MovieUpdateView(UpdateView):
         "cast",
         "rating",
     ]
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "Update Movie"
-
-        return context

@@ -16,11 +16,6 @@ class BookListView(ListView):
     ordering = "created_at"
     context_object_name = "books"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "All Books"
-        return context
-
     def dispatch(self, request, *args, **kwargs):
         try:
             return super(BookListView, self).dispatch(request, *args, **kwargs)
@@ -31,13 +26,6 @@ class BookListView(ListView):
 
 class BookDetailView(DetailView):
     model = Book
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        book = kwargs["object"]
-        context["page_title"] = book.title
-
-        return context
 
 
 class BookCreateView(CreateView):
@@ -51,12 +39,6 @@ class BookCreateView(CreateView):
         "rating",
     ]
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "Create Book"
-
-        return context
-
 
 class BookUpdateView(UpdateView):
     model = Book
@@ -68,9 +50,3 @@ class BookUpdateView(UpdateView):
         "writer",
         "rating",
     ]
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "Update Book"
-
-        return context

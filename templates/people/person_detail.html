@@ -1,8 +1,10 @@
 {% extends "base.html" %} 
 
+{% block page_title %} {{ person.name }} {% endblock page_title %}
+
 {% block content %}
 
-<h2>{{person.name}}</h2>
+<h2>{{ person.name }}</h2>
 <a href="{% url 'people:people_update' person.pk %}">Update</a>
 <a href="{% url 'people:people' %}">BACK TO LIST</a>
 

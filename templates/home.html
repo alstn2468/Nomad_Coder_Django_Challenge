@@ -1,14 +1,13 @@
 {% extends "base.html" %} 
 
+{% block page_title %} HOME {% endblock page_title %}
+
 {% block content %}
 <div>
   <div>
 	<h2>Movies <a href="{% url 'movies:movie_create' %}">[create]</a></h2>
 	{% for movie in movies %}
-	<div>
-		<h3><a href="{% url 'movies:movie_detail' movie.pk %}">{{ movie.title }}</a></h3>
-		<h5>{{ movie.year }}</h5>
-	</div>
+		{% include "mixins/movie.html" with movie=movie %}
 	{% endfor %}
 	<a href="{% url 'movies:movies' %}">See all movies &rarr;</a>
 	<hr />
@@ -17,10 +16,7 @@
 <div>
 	<h2>Books <a href="{% url 'books:book_create' %}">[create]</a></h2>
 	{% for book in books %}
-	<div>
-		<h3><a href="{% url 'books:book_detail' book.pk %}">{{ book.title }}</a></h3>
-		<h5>{{ book.year }}</h5>
-	</div>
+		{% include "mixins/book.html" with book=book %}
 	{% endfor %}
 	<a href="{% url 'books:books' %}">See all books &rarr;</a>
 	<hr />
@@ -29,10 +25,7 @@
 <div>
 	<h2>People <a href="{% url 'people:people_create' %}">[create]</a></h2>
 	{% for person in people %}
-	<div>
-		<h3><a href="{% url 'people:people_detail' person.pk %}">{{ person.name }}</a></h3>
-		<h5>{{ person.kind }}</h5>
-	</div>
+		{% include "mixins/person.html" with person=person %}
 	{% endfor %}
 	<a href="{% url 'people:people' %}">See all people &rarr;</a>
 	<hr />

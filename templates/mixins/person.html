@@ -1,0 +1,8 @@
+<div>
+    <h3>
+        <a href="{% url 'people:people_detail' person.pk %}"
+            >{{ person.name }}</a
+        >
+    </h3>
+    <h5>{{ person.kind }}</h5>
+</div>

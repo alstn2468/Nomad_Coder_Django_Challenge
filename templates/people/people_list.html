@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 
+{% block page_title %} PEOPLE {% endblock page_title %}
+
 {% block content %}
 <div>
   <h2>People</h2>
   {% for person in people %}
-  <div>
-    <h3><a href="{% url 'people:people_detail' person.pk %}">{{ person.name }}</a></h3>
-    <h5>{{ person.kind }}</h5>
-  </div>
+    {% include "mixins/person.html" with person=person %}
   {% endfor %}
 <hr />
 </div>

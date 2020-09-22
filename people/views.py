@@ -17,11 +17,6 @@ class PersonListView(ListView):
     context_object_name = "people"
     template_name = "people/people_list.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "All People"
-        return context
-
     def dispatch(self, request, *args, **kwargs):
         try:
             return super(PersonListView, self).dispatch(request, *args, **kwargs)
@@ -35,11 +30,6 @@ class PersonDetailView(DetailView):
     template_name = "people/person_detail.html"
     context_object_name = "person"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        people = kwargs["object"]
-        context["page_title"] = people.name
-
         return context
 
 
@@ -51,12 +41,6 @@ class PersonCreateView(CreateView):
         "kind",
     ]
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "Create Person"
-
-        return context
-
 
 class PersonUpdateView(UpdateView):
     model = Person
@@ -65,9 +49,3 @@ class PersonUpdateView(UpdateView):
         "photo",
         "kind",
     ]
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "Update Person"
-
-        return context

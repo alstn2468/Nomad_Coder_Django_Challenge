@@ -1,9 +1,8 @@
 {% extends "base.html" %} 
 
+{% block page_title %} SIGN UP {% endblock page_title %}
+
 {% block content %}
-
-SIGNUP
-
-{% include "mixins/auth/auth_form.html" with form=form cta="Sign Up" %}
-
+    SIGNUP
+    {% include "mixins/auth/auth_form.html" with form=form cta="Sign Up" %}
 {% endblock content %}

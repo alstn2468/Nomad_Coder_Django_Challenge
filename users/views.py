@@ -12,11 +12,6 @@ class LoginView(FormView):
     form_class = LoginForm
     success_url = reverse_lazy("core:home")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "Login"
-        return context
-
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
@@ -43,11 +38,6 @@ class SignUpView(FormView):
     form_class = SignUpForm
     success_url = reverse_lazy("core:home")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "Sign Up"
-        return context
-
     def form_valid(self, form):
         form.save()
         email = form.cleaned_data.get("email")
@@ -65,12 +55,6 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = User
     template_name = "users/profile.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = kwargs["object"]
-        context["page_title"] = f"{str(user)} Profile"
-        return context
-
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = User
@@ -80,11 +64,6 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         pk = self.kwargs["pk"]
         return reverse_lazy("users:profile", kwargs={"pk": pk})
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "Profile Update"
-        return context
 
 
 class PasswordChangeView(BasePasswordChangeView):
@@ -96,8 +75,3 @@ class PasswordChangeView(BasePasswordChangeView):
         self.request.session.flush()
         logout(self.request)
         return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["page_title"] = "Password Change"
-        return context
